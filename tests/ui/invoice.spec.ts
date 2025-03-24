@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import * as cartPayloadData from '../../test-data/req-json/cartPayload.json';
 import path from 'path';
 import fs from 'fs/promises';
-let token, cartId, product_price, invoice_id, invoice_number;
+let cartId, product_price, invoice_id, invoice_number;
 
 let cartPayload = { ...cartPayloadData };
 
@@ -10,20 +10,20 @@ test.describe('Example Test Suite', () => {
 
     test.beforeEach(async ({ request }) => {
 
-        await test.step('Log in', async () => {
-            const loginResponse = await request.post(`${process.env.API_URL}/users/login`,
-                {
-                    data: {
-                        email: `${process.env.CUSTOMER_02_USERNAME}`,
-                        password: `${process.env.CUSTOMER_02_PASSWORD}`
-                    }
-                }
-            )
-            expect(loginResponse.status()).toBe(200);
-            const loginResponseJson = await loginResponse.json();
-            token = loginResponseJson.access_token;
-            console.log("##########################\n" + token + "\n##########################");
-        });
+        // await test.step('Log in', async () => {
+        //     const loginResponse = await request.post(`${process.env.API_URL}/users/login`,
+        //         {
+        //             data: {
+        //                 email: `${process.env.CUSTOMER_02_USERNAME}`,
+        //                 password: `${process.env.CUSTOMER_02_PASSWORD}`
+        //             }
+        //         }
+        //     )
+        //     expect(loginResponse.status()).toBe(200);
+        //     const loginResponseJson = await loginResponse.json();
+        //     token = loginResponseJson.access_token;
+        //     console.log("##########################\n" + token + "\n##########################");
+        // });
 
         await test.step('Get product id', async () => {
             const productDetailsResponse = await request.get(`${process.env.API_URL}/products?between=price,1,100&page=1`)
@@ -57,10 +57,6 @@ test.describe('Example Test Suite', () => {
         await test.step('Add to cart', async () => {
             const addToCartResponse = await request.post(`${process.env.API_URL}/carts/${cartId}`,
                 {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    },
                     data: cartPayload
                 }
             )
@@ -90,7 +86,6 @@ test.describe('Example Test Suite', () => {
         await test.step('Generate invoice', async () => {
             const invoiceResponse = await request.post(`${process.env.API_URL}/invoices`,
                 {
-                    headers: { 'Authorization': `Bearer ${token}` },
                     data: {
                         billing_street: "Rosenwag Road",
                         billing_city: "Berlin",
@@ -118,7 +113,7 @@ test.describe('Example Test Suite', () => {
     test('Verify invoice details', async ({ page }) => {
         await page.addInitScript(value => {
             window.localStorage.setItem('auth-token', value);
-        }, token);
+        }, process.env.ACCESS_TOKEN);
         console.log("\n" + "##########################\n" + 'invoice_id : ' + invoice_id);
         await page.goto(`${process.env.UI_URL}/account/invoices/${invoice_id}`);
         await expect.soft(page.getByTestId('invoice-number')).toHaveValue(`${invoice_number}`);
