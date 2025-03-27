@@ -16,8 +16,17 @@ export class HelperBase {
     async generateRandomUserDetails() {
         const firstName = faker.person.firstName() + 'Automation';
         const lastName = faker.person.lastName() + 'Automation';
-        const email = firstName + '@mailinator.com';
         const dateOfBirth = '1990-12-09';
+        const street = faker.location.street();
+        const postalCode = faker.number.int(10000);
+        const city = faker.location.city();
+        const state = faker.location.state();
+        const country = faker.location.countryCode();
+        const phoneNum = faker.phone.imei()
+        const email = firstName + '@mailinator.com';
+        const password = faker.internet.password();
+        const userDetailsArray = [firstName, lastName, dateOfBirth, street, postalCode, city, state, country, phoneNum, email, password];
+        return userDetailsArray;
     }
 
 }
