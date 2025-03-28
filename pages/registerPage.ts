@@ -57,8 +57,6 @@ export class RegisterPage extends HelperBase {
         const responsePromise = this.page.waitForResponse('**/users/register');
         await this.btnRegister.click();
         const response = await responsePromise;
-        const responseBody = await response.json();
-        console.log(responseBody);
         expect.soft(response.status()).toBe(201);
 
         return userDetails;

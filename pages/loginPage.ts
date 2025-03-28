@@ -8,6 +8,8 @@ export class LoginPage {
     readonly txtPassword: any;
     readonly btnLogin: any;
     readonly titleLocator: any;
+    readonly ddNavigationMenu: any;
+    readonly signOut: any;
 
     constructor(page: Page) {
         this.page = page;
@@ -17,6 +19,8 @@ export class LoginPage {
         this.txtPassword = page.locator('[data-test="password"]');
         this.btnLogin = page.locator('[data-test="login-submit"]');
         this.titleLocator = page.locator('[data-test="page-title"]');
+        this.ddNavigationMenu = page.locator('[data-test="nav-menu"]');
+        this.signOut = page.locator('[data-test="nav-sign-out"]');
     }
 
     async loadLoginPage() {
@@ -30,5 +34,11 @@ export class LoginPage {
         await this.txtPassword.fill(password);
         await this.btnLogin.click();
         await this.page.waitForURL('/account');
+    }
+
+    async logout() {
+        await this.ddNavigationMenu.click();
+        await this.signOut.click();
+        //await this.page.waitForURL('/auth/login');
     }
 }

@@ -13,7 +13,7 @@ test.describe('Smoke Test Suite', () => {
             await runAccessibilityCheck(page, testInfo, 'login-page');
         }
 
-        await loginPage.Login(process.env.CUSTOMER_01_USERNAME, process.env.CUSTOMER_01_PASSWORD);
+        await loginPage.login(process.env.CUSTOMER_01_USERNAME, process.env.CUSTOMER_01_PASSWORD);
         await homePage.clickHome();
 
         if (ENABLE_ACCESSIBILITY_CHECKS) {
