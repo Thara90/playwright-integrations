@@ -11,22 +11,22 @@ export class HelperBase {
 
     async waitforNumberofSeconds(seconds: number) {
         await this.page.waitForTimeout(seconds * 1000);
-    }   
+    }
 
     async generateRandomUserDetails() {
-        const firstName = faker.person.firstName() + 'Automation';
-        const lastName = faker.person.lastName() + 'Automation';
-        const dateOfBirth = '1990-12-09';
-        const street = faker.location.street();
-        const postalCode = faker.number.int(10000);
-        const city = faker.location.city();
-        const state = faker.location.state();
-        const country = faker.location.countryCode();
-        const phoneNum = faker.phone.imei()
-        const email = firstName + '@mailinator.com';
-        const password = faker.internet.password();
-        const userDetailsArray = [firstName, lastName, dateOfBirth, street, postalCode, city, state, country, phoneNum, email, password];
-        return userDetailsArray;
+        return {
+            firstName: faker.person.firstName() + 'Automation',
+            lastName: faker.person.lastName() + 'Automation',
+            dateOfBirth: '1990-12-09',
+            street: faker.location.street(),
+            postalCode: faker.number.int(10000).toString(),
+            city: faker.location.city(),
+            state: faker.location.state(),
+            countryCode: faker.location.countryCode(),
+            phoneNum: faker.number.int(1000000000).toString(),
+            email: faker.person.firstName() + 'Automation@mailinator.com',
+            password: 'Nexus@19901209'
+        };
     }
 
 }

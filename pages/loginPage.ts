@@ -25,7 +25,7 @@ export class LoginPage {
         const req = await requestPromise;
     }
 
-    async Login(username, password) {
+    async login(username, password) {
         await this.txtEmail.fill(username);
         await this.txtPassword.fill(password);
         await this.btnLogin.click();
