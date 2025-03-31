@@ -1,5 +1,3 @@
-
-
 import { LoginPage } from '../../pages/loginPage';
 import { HomePage } from '../../pages/homePage';
 
@@ -23,10 +21,10 @@ export const config = {
 
 export const scenarios = [{
   engine: 'playwright',
-  testFunction: pageLoadAndLogin
+  testFunction: ProductSearchWithLogin,
 }];
 
-async function pageLoadAndLogin(page, vuContext, events, test) {
+async function ProductSearchWithLogin(page, vuContext, events, test) {
 
   const { step } = test;
   const loginPage = new LoginPage(page);
@@ -37,7 +35,7 @@ async function pageLoadAndLogin(page, vuContext, events, test) {
   });
 
   await step('02.submit-login', async () => {
-    await loginPage.Login("customer@practicesoftwaretesting.com", "welcome01");
+    await loginPage.login("customer@practicesoftwaretesting.com", "welcome01");
   });
 
   await step('03.search-product', async () => {
