@@ -12,10 +12,12 @@ test.describe('User Registration', () => {
         await loginPage.logout();
     });
 
-    test.afterEach(async ({ loginPage }) => {
+    test.afterEach(async ({ loginPage , usersPage}) => {
         await loginPage.loadLoginPage();
         await loginPage.login(process.env.ADMIN_USERNAME, process.env.ADMIN_PASSWORD);
-
+        await usersPage.loadUsers();
+        await usersPage.deleteUser(userDetails.email);
+        
     });
 
 });
