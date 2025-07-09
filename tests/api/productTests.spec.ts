@@ -13,13 +13,13 @@ test('Get product list', async ({ request }) => {
   console.log(response);
 });
 
-// test('Get product list with valid page id', async ({ request }) => {
-//   const productService = new ProductService();
+test('Get product list with valid page id', async ({ request }) => {
+  const productClient = new ProductClient(request);
 
-//   const _response = await productService.getProduct(request, 1);
-//   expect.soft(_response.status()).toBe(200);
-//   expect.soft(_response.ok()).toBeTruthy();
+  const _response = await productClient.getProductById('01JZQQSCWD36K2VHMC87SH423Q');
+  expect.soft(_response.status()).toBe(200);
+  expect.soft(_response.ok()).toBeTruthy();
 
-//   const response = await _response.json();
-//   console.log(response);
-// });
+  const response = await _response.json();
+  console.log(response);
+});

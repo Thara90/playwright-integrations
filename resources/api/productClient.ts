@@ -16,8 +16,9 @@ export class ProductClient {
     return response;
   }
 
-  async getProductById(id: number) {
+  async getProductById(id: string) {
     const response = await this.request.get(`${this.baseUrl}/products/${id}`);
+    console.log(`${this.baseUrl}/products/${id}`);
     return response;
   }
   // Optional: add other methods later like getProductById(id), searchProducts(query), etc.
