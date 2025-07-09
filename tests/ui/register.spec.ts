@@ -1,4 +1,4 @@
-import { test } from '../../pages/fixtures';
+import { test } from '../../resources/pages/fixtures';
 
 
 test.describe('User Registration', () => {

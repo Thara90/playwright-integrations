@@ -1,4 +1,4 @@
-import { test } from '../../pages/fixtures';
+import { test } from '../../resources/pages/fixtures';
 import productlist from '../../test-data/mock-data-json/productlist-mock.json';
 
 test.use({ storageState: ".auth/customer01.json" });

@@ -1,5 +1,5 @@
-import { test } from '../../pages/fixtures';
-import { runAccessibilityCheck } from '../../utils/accessibilityChecker';
+import { test } from '../../resources/pages/fixtures';
+import { runAccessibilityCheck } from '../../resources/utils/accessibilityChecker';
 const ENABLE_ACCESSIBILITY_CHECKS = process.env.ENABLE_ACCESSIBILITY_CHECKS === 'true';
 
 test.use({ storageState: { cookies: [], origins: [] } });
@@ -10,7 +10,7 @@ test.describe('Smoke Test Suite', () => {
 
         await loginPage.loadLoginPage();
         if (ENABLE_ACCESSIBILITY_CHECKS) {
-            await runAccessibilityCheck(page, testInfo, 'login-page');
+            await runAccessibilityCheck(loginPage, testInfo, 'login-page');
         }
 
         await loginPage.login(process.env.CUSTOMER_01_USERNAME, process.env.CUSTOMER_01_PASSWORD);
