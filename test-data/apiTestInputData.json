@@ -1,0 +1,16 @@
+{
+  "credentials": {
+    "valid": {
+      "email": "customer2@practicesoftwaretesting.com",
+      "password": "welcome01"
+    },
+    "invalidUsername": {
+      "email": "test@practicesoftwaretesting.com",
+      "password": "welcome01"
+    },
+    "invalidPassword": {
+      "email": "customer2@practicesoftwaretesting.com",
+      "password": "wrongpass"
+    }
+  }
+}
