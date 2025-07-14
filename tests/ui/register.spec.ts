@@ -1,4 +1,4 @@
-import { test } from '../../resources/pages/uiFixtures';
+import { test } from '../../resources/ui/pages/uiFixtures';
 
 
 test.describe('User Registration', () => {
