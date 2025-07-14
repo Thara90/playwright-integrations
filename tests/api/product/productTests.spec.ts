@@ -1,10 +1,7 @@
-import { test, expect } from '@playwright/test';
-import { ProductClient } from '../../../resources/api/clients/productClient';
+import { expect, test } from '../../../resources/api/fixtures/apiFixtures';
 
 //npx playwright test tests/api/productTests.spec.ts
-test('Get product list', async ({ request }) => {
-  const productClient = new ProductClient(request);
-
+test('Get product list', async ({ productClient }) => {
   const _response = await productClient.getProducts();
   expect.soft(_response.status()).toBe(200);
   expect.soft(_response.ok()).toBeTruthy();
@@ -13,9 +10,7 @@ test('Get product list', async ({ request }) => {
   console.log(response);
 });
 
-test('Create product with valid data', async ({ request }) => {
-  const productClient = new ProductClient(request);
-
+test('Create product with valid data', async ({ productClient }) => {
   const productData = {
     name: 'automation test product',
     description: 'This is a automation test product description',

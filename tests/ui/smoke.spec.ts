@@ -1,4 +1,4 @@
-import { test } from '../../resources/pages/fixtures';
+import { test } from '../../resources/pages/uiFixtures';
 import { runAccessibilityCheck } from '../../resources/utils/accessibilityChecker';
 const ENABLE_ACCESSIBILITY_CHECKS = process.env.ENABLE_ACCESSIBILITY_CHECKS === 'true';
 
