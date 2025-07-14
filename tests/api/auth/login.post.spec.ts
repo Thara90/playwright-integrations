@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { UserClient } from '../../../resources/api/clients/userClient';
 import ApiTestInputData from '../../../test-data/apiTestInputData.json';
 
-//npx playwright test tests/api/login.post.spec.ts
+//npx playwright test tests/api/auth/login.post.spec.ts
 test.describe('Authentication test suite', () => {
   test('Login with valid credenatials', async ({ request }) => {
     const userClient = new UserClient(request);

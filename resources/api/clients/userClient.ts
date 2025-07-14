@@ -23,8 +23,13 @@ export class UserClient {
     return response;
   }
 
-  async getUsers() {
-    const response = await this.request.get(`${this.baseUrl}/users`);
+  async getUsers(token) {
+    const response = await this.request.get(`${this.baseUrl}/users`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
     console.log(`${this.baseUrl}/users`);
     return response;
   }
