@@ -10,19 +10,19 @@ export class ProductClient {
     this.baseUrl = process.env.API_URL!;
   }
 
-  async getAllProducts() {
+  async getProducts() {
     const response = await this.request.get(`${this.baseUrl}/products`);
     console.log(`${this.baseUrl}/products`);
     return response;
   }
 
-  async getProductById(id: string) {
+  async getProduct(id: string) {
     const response = await this.request.get(`${this.baseUrl}/products/${id}`);
     console.log(`${this.baseUrl}/products/${id}`);
     return response;
   }
 
-  async createProduct(productData: {
+  async postProduct(productData: {
     name: string;
     description: string;
     stock: string;

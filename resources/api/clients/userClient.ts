@@ -10,13 +10,7 @@ export class UserClient {
     this.baseUrl = process.env.API_URL!;
   }
 
-  async getAllUsers() {
-    const response = await this.request.get(`${this.baseUrl}/users`);
-    console.log(`${this.baseUrl}/users`);
-    return response;
-  }
-
-  async createLogin(credentials: {
+  async postLogin(credentials: {
     email: string;
     password: string;
   }) {
@@ -26,6 +20,12 @@ export class UserClient {
         'Content-Type': 'application/json'
       }
     });
+    return response;
+  }
+
+  async getUsers() {
+    const response = await this.request.get(`${this.baseUrl}/users`);
+    console.log(`${this.baseUrl}/users`);
     return response;
   }
 }

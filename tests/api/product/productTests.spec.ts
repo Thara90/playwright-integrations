@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
-import { ProductClient } from '../../resources/api/productClient';
+import { ProductClient } from '../../../resources/api/clients/productClient';
 
 //npx playwright test tests/api/productTests.spec.ts
 test('Get product list', async ({ request }) => {
   const productClient = new ProductClient(request);
 
-  const _response = await productClient.getAllProducts();
+  const _response = await productClient.getProducts();
   expect.soft(_response.status()).toBe(200);
   expect.soft(_response.ok()).toBeTruthy();
 
@@ -28,7 +28,7 @@ test('Create product with valid data', async ({ request }) => {
     is_rental: false
   };
 
-  const _response = await productClient.createProduct(productData);
+  const _response = await productClient.postProduct(productData);
   expect.soft(_response.status()).toBe(201);
   expect.soft(_response.ok()).toBeTruthy();
 

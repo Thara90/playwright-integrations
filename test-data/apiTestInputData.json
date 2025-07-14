@@ -1,6 +1,10 @@
 {
   "credentials": {
-    "valid": {
+    "customer1": {
+      "email": "customer@practicesoftwaretesting.com",
+      "password": "welcome01"
+    },
+    "customer2": {
       "email": "customer2@practicesoftwaretesting.com",
       "password": "welcome01"
     },
@@ -11,6 +15,10 @@
     "invalidPassword": {
       "email": "customer2@practicesoftwaretesting.com",
       "password": "wrongpass"
+    },
+    "admin": {
+      "email": "admin@practicesoftwaretesting.com",
+      "password": "welcome01"
     }
   }
 }
