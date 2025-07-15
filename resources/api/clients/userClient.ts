@@ -1,6 +1,5 @@
 import { APIRequestContext, expect } from '@playwright/test';
 import { log } from 'console';
-import REGISTER_USR_REQUEST from '../req-jsons/post-register-request.json';
 
 export class UserClient {
   readonly request: APIRequestContext;
@@ -26,9 +25,9 @@ export class UserClient {
     return response;
   }
 
-  async postRegister() {
+  async postRegister(userData: Record<string, any>) {
     const response = await this.request.post(`${this.baseUrl}/users/register`, {
-      data: REGISTER_USR_REQUEST,
+      data: userData,
       headers: {
         'Content-Type': 'application/json'
       }

@@ -18,6 +18,9 @@ export const test = baseTest.extend<ApiFixtures>({
   productClient: async ({ request }, use) => {
     await use(new ProductClient(request));
   },
+
+  /* ----------- TOKEN GENERATION ----------- */
+
   adminToken: async ({ request }, use) => {
     const userClient = new UserClient(request);
     const res = await userClient.postLogin(ApiTestInputData.credentials.admin);
