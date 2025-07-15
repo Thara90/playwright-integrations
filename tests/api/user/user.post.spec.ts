@@ -2,7 +2,6 @@ import { expect, test } from '../../../resources/api/fixtures/apiFixtures';
 import ApiTestInputData from '../../../test-data/apiTestInputData.json';
 
 //npx playwright test tests/api/user/user.post.spec.ts
-
 test.describe('/users/register - POST endpoint validation', () => {
 
     test('Retreive all users', async ({ userClient }) => {

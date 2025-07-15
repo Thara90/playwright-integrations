@@ -1,10 +1,14 @@
 import { test as baseTest, APIRequestContext } from '@playwright/test';
 import { UserClient } from '../clients/userClient';
 import { ProductClient } from '../clients/productClient';
+import ApiTestInputData from '../../../test-data/apiTestInputData.json';
 
 type ApiFixtures = {
   userClient: UserClient;
   productClient: ProductClient;
+  adminToken: string;
+  customer1Token: string;
+  customer2Token: string;
 };
 
 export const test = baseTest.extend<ApiFixtures>({
@@ -13,6 +17,29 @@ export const test = baseTest.extend<ApiFixtures>({
   },
   productClient: async ({ request }, use) => {
     await use(new ProductClient(request));
+  },
+  adminToken: async ({ request }, use) => {
+    const userClient = new UserClient(request);
+    const res = await userClient.postLogin(ApiTestInputData.credentials.admin);
+    if (res.status() !== 200) throw new Error('Admin login failed');
+    const body = await res.json();
+    await use(body.access_token);
+  },
+
+  customer1Token: async ({ request }, use) => {
+    const userClient = new UserClient(request);
+    const res = await userClient.postLogin(ApiTestInputData.credentials.customer1);
+    if (res.status() !== 200) throw new Error('Customer 01 login failed');
+    const body = await res.json();
+    await use(body.access_token);
+  },
+
+  customer2Token: async ({ request }, use) => {
+    const userClient = new UserClient(request);
+    const res = await userClient.postLogin(ApiTestInputData.credentials.customer2);
+    if (res.status() !== 200) throw new Error('Customer 02 login failed');
+    const body = await res.json();
+    await use(body.access_token);
   }
 });
 
