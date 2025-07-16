@@ -28,19 +28,7 @@ test.describe('/users/register - POST endpoint validation', () => {
     });
 
     test('Register an user with invalid password', async ({ userClient }) => {
-        const userData = {
-            first_name: 'Automation',
-            last_name: 'Tester',
-            street: '123 Test St',
-            city: 'Testville',
-            state: 'TS',
-            country: 'QA',
-            postal_code: '1234AA',
-            phone: '9876543210',
-            dob: '1970-01-01',
-            password: 'invalid',
-            email: `automation+${Date.now()}@example.com`
-        };
+        const userData = await UserDataBuilder.invalidPassword();
         const requestData = fillRequestTemplate(registerUserTemplate, userData);
         const _response = await userClient.postRegister(requestData);
         expect.soft(_response.status()).toBe(422);

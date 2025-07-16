@@ -4,12 +4,6 @@ import ApiTestInputData from '../../../test-data/apiTestInputData.json';
 //npx playwright test tests/api/user/user.get.spec.ts
 
 test.describe('/users - Get endpoint validation', () => {
-    // test.beforeAll(async ({ userClient }) => {
-    //     const _response = await userClient.postLogin(ApiTestInputData.credentials.admin);
-    //     expect(_response.status()).toBe(200);
-    //     const response = await _response.json();
-    //     token = response.access_token;
-    // });
 
     test('Retreive all users', async ({ adminToken , userClient }) => {
         const _response = await userClient.getUsers(adminToken );
