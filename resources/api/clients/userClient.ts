@@ -12,10 +12,7 @@ export class UserClient {
 
   /* ----------- POST ENDPOINTS ----------- */
 
-  async postLogin(credentials: {
-    email: string;
-    password: string;
-  }) {
+  async postLogin(credentials: Record<string, any>) {
     const response = await this.request.post(`${this.baseUrl}/users/login`, {
       data: credentials,
       headers: {

@@ -31,7 +31,7 @@ test.describe('/users - Get endpoint validation', () => {
 
 test.describe('/users/me - Get endpoint validation', () => {
 
-    test('Retreive all users', async ({ adminToken , userClient }) => {
+    test('Retreive current user', async ({ adminToken , userClient }) => {
         const _response = await userClient.getCurrentUser(adminToken );
         expect.soft(_response.status()).toBe(200);
         expect.soft(_response.ok()).toBeTruthy();
@@ -40,7 +40,7 @@ test.describe('/users/me - Get endpoint validation', () => {
         console.log(response);
     });
 
-    test('Retreive all users without authorizing', async ({ userClient }) => {
+    test('Retreive current user without authorizing', async ({ userClient }) => {
         const _response = await userClient.getCurrentUser('invalidToken');
         expect.soft(_response.status()).toBe(401);
         const response = await _response.json();
