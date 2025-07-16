@@ -1,5 +1,5 @@
-import { LoginPage } from '../../resources/pages/loginPage';
-import { HomePage } from '../../resources/pages/homePage';
+import { LoginPage } from '../../resources/ui/pages/loginPage';
+import { HomePage } from '../../resources/ui/pages/homePage';
 
 export const config = {
   target: 'https://practicesoftwaretesting.com/auth/login',
