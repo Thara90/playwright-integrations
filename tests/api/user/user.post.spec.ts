@@ -65,7 +65,7 @@ test.describe('/users/register - POST endpoint validation', () => {
             expect.soft(_response.status()).toBe(200);
             console.log(`Deleted user with ID: ${userId}`);
         } else {
-            console.warn('No user was created. Skipping cleanup.');
+            console.warn('No user was created. Skipping deletion of user.');
         }
     });
 });
