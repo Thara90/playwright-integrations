@@ -5,6 +5,7 @@ import { UserDataBuilder } from '@dataBuilders/userDataBuilder';
 
 //npx playwright test tests/api/user/user.post.spec.ts
 test.describe('/users/register - POST endpoint validation', () => {
+    let userId: string;
 
     test('Register an user', async ({ userClient }) => {
         const userData = await UserDataBuilder.validRequestBody();
@@ -24,6 +25,7 @@ test.describe('/users/register - POST endpoint validation', () => {
         expect.soft(response.address.state).toBe(userData.state);
         expect.soft(response.address.country).toBe(userData.country);
         expect.soft(response.address.postal_code).toBe(userData.postal_code);
+        userId = response.id;
         console.log(response);
     });
 
@@ -55,5 +57,15 @@ test.describe('/users/register - POST endpoint validation', () => {
             'The password field must contain at least one number.'
         ]);
         console.log(response);
+    });
+
+    test.afterAll(async ({ adminToken, userClient }) => {
+        if (userId) {
+            const _response = await userClient.deleteUser(adminToken, userId);
+            expect.soft(_response.status()).toBe(200);
+            console.log(`Deleted user with ID: ${userId}`);
+        } else {
+            console.warn('No user was created. Skipping cleanup.');
+        }
     });
 });

@@ -55,4 +55,17 @@ export class UserClient {
     console.log(`${this.baseUrl}/users/me`);
     return response;
   }
+
+  /* ----------- DELETE ENDPOINTS ----------- */
+
+  async deleteUser(token, userId: string) {
+    const response = await this.request.get(`${this.baseUrl}/users/${userId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    console.log(`${this.baseUrl}/users${userId}`);
+    return response;
+  }
 }
