@@ -1,7 +1,7 @@
-import { expect, test } from '../../../resources/api/fixtures/apiFixtures';
-import registerUserTemplate from '../../../resources/api/req-jsons/post-register-request.json';
-import { fillRequestTemplate } from '../../../resources/utils/apiUtils';
-import { UserDataBuilder } from '../../../resources/api/dataBuilders/userDataBuilder';
+import { expect, test } from '@fixtures/apiFixtures';
+import registerUserTemplate from '@requestsTemplates/post-register-request.json';
+import { fillRequestTemplate } from '@utils/apiUtils';
+import { UserDataBuilder } from '@dataBuilders/userDataBuilder';
 
 //npx playwright test tests/api/user/user.post.spec.ts
 test.describe('/users/register - POST endpoint validation', () => {

@@ -1,5 +1,4 @@
-import { expect, test } from '../../../resources/api/fixtures/apiFixtures';
-import ApiTestInputData from '../../../test-data/apiTestInputData.json';
+import { expect, test } from '@fixtures/apiFixtures';
 
 //npx playwright test tests/api/user/user.get.spec.ts
 

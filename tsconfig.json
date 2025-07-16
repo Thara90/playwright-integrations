@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@dataBuilders/*": ["resources/api/dataBuilders/*"],
+      "@requestsTemplates/*": ["resources/api/req-jsons/*"],
+      "@fixtures/*": ["resources/api/fixtures/*"],
+      "@utils/*": ["resources/utils/*"]
+    }
+  }
+}
