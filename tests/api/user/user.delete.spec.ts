@@ -31,4 +31,12 @@ test.describe('/users/{userId} - DELETE endpoint validation', () => {
         expect.soft(response.id[0]).toBe("The selected id is invalid.");
         console.log(response);
     });
+
+        test("Delete user without authorizing", async ({ userClient }) => {
+        const _response = await userClient.deleteUser('invalidToken', 'nonExistentUserId');
+        expect.soft(_response.status()).toBe(401);
+        const response = await _response.json();
+        expect.soft(response.message).toBe("Unauthorized");
+        console.log(response);
+    });
 });
