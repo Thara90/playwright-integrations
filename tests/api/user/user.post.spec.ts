@@ -7,7 +7,7 @@ import { UserDataBuilder } from '@dataBuilders/userDataBuilder';
 test.describe('/users/register - POST endpoint validation', () => {
     let userId: string;
 
-    test('Register an user', async ({ userClient }) => {
+    test('Register an user successfully', async ({ userClient }) => {
         const userData = await UserDataBuilder.validRequestBody();
         const requestData = fillRequestTemplate(registerUserTemplate, userData);
         const _response = await userClient.postRegister(requestData);
