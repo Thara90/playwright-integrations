@@ -30,8 +30,8 @@ export class UserClient {
         'Content-Type': 'application/json'
       }
     });
-    return response;
     console.log(`${this.baseUrl}/users/register`);
+    return response;
   }
 
   /* ----------- GET ENDPOINTS ----------- */
