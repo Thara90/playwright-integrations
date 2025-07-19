@@ -19,6 +19,7 @@ export class UserClient {
         'Content-Type': 'application/json'
       }
     });
+    console.log(`${this.baseUrl}/users/login`);
     return response;
   }
 
@@ -30,6 +31,7 @@ export class UserClient {
       }
     });
     return response;
+    console.log(`${this.baseUrl}/users/register`);
   }
 
   /* ----------- GET ENDPOINTS ----------- */
@@ -42,6 +44,17 @@ export class UserClient {
       }
     });
     console.log(`${this.baseUrl}/users`);
+    return response;
+  }
+
+  async getUserById(token, userId: string) {
+    const response = await this.request.get(`${this.baseUrl}/users/${userId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    console.log(`${this.baseUrl}/users/${userId}`);
     return response;
   }
 
