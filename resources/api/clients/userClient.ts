@@ -68,4 +68,17 @@ export class UserClient {
     console.log(`${this.baseUrl}/users/${userId}`);
     return response;
   }
+
+  /* ----------- PUT ENDPOINTS ----------- */
+
+  async putUser(token, userData: Record<string, any>, userId: string) {
+    const response = await this.request.put(`${this.baseUrl}/users/${userId}`, {
+      data: userData,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    return response;
+  }
 }
