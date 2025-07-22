@@ -16,7 +16,7 @@ test.describe('/users/{userId} - DELETE endpoint validation', () => {
 
         await test.step('Delete user', async () => {
             const _response = await userClient.deleteUser(adminToken, userId);
-            expect(_response.status()).toBe(204);
+            expect(_response.status()).toBe(201);
             console.log(`Deleted user with ID: ${userId}`);
         });
     });

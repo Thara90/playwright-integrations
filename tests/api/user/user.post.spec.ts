@@ -28,7 +28,7 @@ test.describe('/users/register - POST endpoint validation', () => {
         await test.step('Delete registered user to clean up', async () => {
             console.log('Deleting user with ID:', userId);
             const _response = await userClient.deleteUser(adminToken, userId);
-            expect.soft(_response.status()).toBe(204);
+            expect(_response.status()).toBe(204);
             console.log(`Deleted user with ID: ${userId}`);
         });
     });
