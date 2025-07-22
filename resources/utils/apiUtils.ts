@@ -12,10 +12,15 @@ export function fillRequestTemplate(template: any, data: Record<string, any>) {
   return JSON.parse(filledString);
 }
 
-export function logRequest(method: string, url: string, body?: any) {
-  console.log(`\nREQUEST → ${method.toUpperCase()} ${url}`);
+export function logRequest(method: string, url: string, headers?: Record<string, string>, body?: any) {
+  console.log(`\nRQUEST → ${method.toUpperCase()} ${url}`);
+
+  if (headers?.Authorization) {
+    console.log(`Token: ${headers.Authorization}`);
+  }
+
   if (body) {
-    console.log('🔸 Request Body:', JSON.stringify(body, null, 2));
+    console.log('Request Body:', JSON.stringify(body, null, 2));
   }
 }
 
@@ -34,6 +39,7 @@ export async function logResponse(response: APIResponse) {
 }
 
 export async function createUser(userClient: any) {
+  console.log('**** Registering user ****');
   const userData = await UserDataBuilder.validRequestBody();
   const requestData = fillRequestTemplate(registerUserTemplate, userData);
 

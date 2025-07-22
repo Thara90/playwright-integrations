@@ -29,7 +29,7 @@ test.describe('/users/${userId} - Get endpoint validation', () => {
         await test.step('Register an user', async () => {
             const { createdUser } = await createUser(userClient);
             userId = createdUser.id;
-            console.log(`[beforeAll] Registered user Id: ${userId}`);
+            console.log(`Registered user Id: ${userId}`);
         });
         await test.step('Retreive user', async () => {
             const _response = await userClient.getUserById(adminToken, userId);

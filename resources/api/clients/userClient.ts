@@ -20,19 +20,22 @@ export class UserClient {
         'Content-Type': 'application/json'
       }
     });
-    logRequest('POST', `${this.baseUrl}/users/login`, credentials);
-    await logResponse(response);
+    //logRequest('POST', `${this.baseUrl}/users/login`, credentials);
+    //await logResponse(response);
     return response;
   }
 
   async postRegister(userData: Record<string, any>) {
-    const response = await this.request.post(`${this.baseUrl}/users/register`, {
+    const url = `${this.baseUrl}/users/register`;
+    const headers = {
+      'Content-Type': 'application/json'
+    }
+    const response = await this.request.post(url, {
       data: userData,
-      headers: {
-        'Content-Type': 'application/json'
-      }
+      headers
     });
-    logRequest('POST', `${this.baseUrl}/users/register`, userData);
+
+    logRequest('POST', url, userData);
     await logResponse(response);
     return response;
   }
@@ -40,37 +43,40 @@ export class UserClient {
   /* ----------- GET ENDPOINTS ----------- */
 
   async getUsers(token) {
-    const response = await this.request.get(`${this.baseUrl}/users`, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    });
-    logRequest('GET', `${this.baseUrl}/users`);
+    const url = `${this.baseUrl}/users`;
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+    const response = await this.request.get(url, { headers });
+
+    logRequest('GET', url, headers);
     await logResponse(response);
     return response;
   }
 
   async getUserById(token, userId: string) {
-    const response = await this.request.get(`${this.baseUrl}/users/${userId}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    });
-    logRequest('GET', `${this.baseUrl}/users/${userId}`);
+    const url = `${this.baseUrl}/users/${userId}`;
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+    const response = await this.request.get(url, { headers });
+
+    logRequest('GET', url, headers);
     await logResponse(response);
     return response;
   }
 
   async getCurrentUser(token) {
-    const response = await this.request.get(`${this.baseUrl}/users/me`, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    });
-    logRequest('GET', `${this.baseUrl}/users/me`);
+    const url = `${this.baseUrl}/users/me`;
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+    const response = await this.request.get(url, { headers });
+
+    logRequest('GET', url, headers);
     await logResponse(response);
     return response;
   }
@@ -78,13 +84,15 @@ export class UserClient {
   /* ----------- DELETE ENDPOINTS ----------- */
 
   async deleteUser(token, userId: string) {
-    const response = await this.request.delete(`${this.baseUrl}/users/${userId}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    });
-    logRequest('DELETE', `${this.baseUrl}/users/${userId}`);
+    const url = `${this.baseUrl}/users/${userId}`;
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    };
+
+    const response = await this.request.delete(url, { headers });
+
+    logRequest('DELETE', url, headers);
     await logResponse(response);
     return response;
   }
@@ -92,14 +100,18 @@ export class UserClient {
   /* ----------- PUT ENDPOINTS ----------- */
 
   async putUser(token, userData: Record<string, any>, userId: string) {
-    const response = await this.request.put(`${this.baseUrl}/users/${userId}`, {
+    const url = `${this.baseUrl}/users/${userId}`;
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    };
+
+    const response = await this.request.put(url, {
       data: userData,
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
+      headers
     });
-    logRequest('PUT', `${this.baseUrl}/users/${userId}`, userData);
+
+    logRequest('PUT', url, headers, userData);
     await logResponse(response);
     return response;
   }
