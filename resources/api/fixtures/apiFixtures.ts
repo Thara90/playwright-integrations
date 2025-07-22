@@ -22,6 +22,7 @@ export const test = baseTest.extend<ApiFixtures>({
   /* ----------- TOKEN GENERATION ----------- */
 
   adminToken: async ({ request }, use) => {
+    console.log('**** Generating token for admin ****');
     const userClient = new UserClient(request);
     const res = await userClient.postLogin(ApiTestInputData.credentials.admin);
     if (res.status() !== 200) throw new Error('Admin login failed');
@@ -30,6 +31,7 @@ export const test = baseTest.extend<ApiFixtures>({
   },
 
   customer1Token: async ({ request }, use) => {
+    console.log('**** Generating token for Customer 01 ****');
     const userClient = new UserClient(request);
     const res = await userClient.postLogin(ApiTestInputData.credentials.customer1);
     if (res.status() !== 200) throw new Error('Customer 01 login failed');
@@ -38,6 +40,7 @@ export const test = baseTest.extend<ApiFixtures>({
   },
 
   customer2Token: async ({ request }, use) => {
+    console.log('**** Generating token for Customer 02 ****');
     const userClient = new UserClient(request);
     const res = await userClient.postLogin(ApiTestInputData.credentials.customer2);
     if (res.status() !== 200) throw new Error('Customer 02 login failed');

@@ -11,7 +11,7 @@ export function fillRequestTemplate(template: any, data: Record<string, any>) {
 }
 
 export function logRequest(method: string, url: string, body?: any) {
-  console.log(`\n REQUEST → ${method.toUpperCase()} ${url}`);
+  console.log(`\nREQUEST → ${method.toUpperCase()} ${url}`);
   if (body) {
     console.log('🔸 Request Body:', JSON.stringify(body, null, 2));
   }
@@ -27,6 +27,6 @@ export async function logResponse(response: APIResponse) {
     body = await response.text();
   }
 
-  console.log(`RESPONSE ← Status: ${status}`);
+  console.log(`\nRESPONSE ← Status: ${status}`);
   console.log('🔹 Response Body:', body);
 }

@@ -46,7 +46,7 @@ export class UserClient {
         'Content-Type': 'application/json'
       }
     });
-    logRequest('GET', `${this.baseUrl}/users`, {});
+    logRequest('GET', `${this.baseUrl}/users`);
     await logResponse(response);
     return response;
   }
@@ -58,7 +58,7 @@ export class UserClient {
         'Content-Type': 'application/json'
       }
     });
-    logRequest('GET', `${this.baseUrl}/users/${userId}`, {});
+    logRequest('GET', `${this.baseUrl}/users/${userId}`);
     await logResponse(response);
     return response;
   }
@@ -70,7 +70,7 @@ export class UserClient {
         'Content-Type': 'application/json'
       }
     });
-    logRequest('GET', `${this.baseUrl}/users/me`, {});
+    logRequest('GET', `${this.baseUrl}/users/me`);
     await logResponse(response);
     return response;
   }
@@ -84,7 +84,7 @@ export class UserClient {
         'Content-Type': 'application/json'
       }
     });
-    logRequest('DELETE', `${this.baseUrl}/users/${userId}`, {});
+    logRequest('DELETE', `${this.baseUrl}/users/${userId}`);
     await logResponse(response);
     return response;
   }
@@ -99,7 +99,7 @@ export class UserClient {
         'Content-Type': 'application/json'
       }
     });
-    logRequest('PUT', `${this.baseUrl}/users/${userId}`, {});
+    logRequest('PUT', `${this.baseUrl}/users/${userId}`, userData);
     await logResponse(response);
     return response;
   }
