@@ -1,6 +1,6 @@
 import { expect, test } from '@fixtures/apiFixtures';
 import registerUserTemplate from '@requestsTemplates/post-register-request.json';
-import { fillRequestTemplate } from '@utils/apiUtils';
+import { fillRequestTemplate, createUser} from '@utils/apiUtils';
 import { UserDataBuilder } from '@dataBuilders/userDataBuilder';
 
 //npx playwright test tests/api/user/user.post.spec.ts
@@ -10,13 +10,7 @@ test.describe('/users/register - POST endpoint validation', () => {
         let userId: string;
 
         await test.step('Send POST request to register user', async () => {
-            const userData = await UserDataBuilder.validRequestBody();
-            const requestData = fillRequestTemplate(registerUserTemplate, userData);
-
-            // Create user
-            const createResponse = await userClient.postRegister(requestData);
-            expect.soft(createResponse.status()).toBe(201);
-            const createdUser = await createResponse.json();
+            const { userData , createdUser } = await createUser(userClient);
             userId = createdUser.id;
 
             // Validate response

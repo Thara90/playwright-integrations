@@ -9,6 +9,7 @@ type ApiFixtures = {
   adminToken: string;
   customer1Token: string;
   customer2Token: string;
+  createUser: string;
 };
 
 export const test = baseTest.extend<ApiFixtures>({

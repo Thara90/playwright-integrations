@@ -1,7 +1,5 @@
 import { expect, test } from '@fixtures/apiFixtures';
-import registerUserTemplate from '@requestsTemplates/post-register-request.json';
-import { fillRequestTemplate } from '@utils/apiUtils';
-import { UserDataBuilder } from '@dataBuilders/userDataBuilder';
+import { createUser } from '@utils/apiUtils';
 
 //npx playwright test tests/api/user/user.get.spec.ts
 
@@ -25,21 +23,20 @@ test.describe('/users - Get endpoint validation', () => {
 test.describe('/users/${userId} - Get endpoint validation', () => {
     let userId: string;
 
-    test.beforeAll("Register an user", async ({ userClient }) => {
-        const userData = await UserDataBuilder.validRequestBody();
-        const requestData = fillRequestTemplate(registerUserTemplate, userData);
-        const _response = await userClient.postRegister(requestData);
-        expect.soft(_response.status()).toBe(201);
-        const response = await _response.json();
-        userId = response.id;
-        console.log(`[beforeAll] Registered user Id: ${userId}`);
-    });
-
     test('Retreive registered user', async ({ adminToken, userClient }) => {
-        const _response = await userClient.getUserById(adminToken, userId);
-        expect.soft(_response.status()).toBe(200);
-        expect.soft(_response.ok()).toBeTruthy();
-        const response = await _response.json();
+        let userId: string;
+
+        await test.step('Register an user', async () => {
+            const { createdUser } = await createUser(userClient);
+            userId = createdUser.id;
+            console.log(`[beforeAll] Registered user Id: ${userId}`);
+        });
+        await test.step('Retreive user', async () => {
+            const _response = await userClient.getUserById(adminToken, userId);
+            expect.soft(_response.status()).toBe(200);
+            expect.soft(_response.ok()).toBeTruthy();
+            const response = await _response.json();
+        });
     });
 
     test("Retreive user that doesn't exist", async ({ adminToken, userClient }) => {
