@@ -5,28 +5,38 @@ import { UserDataBuilder } from '@dataBuilders/userDataBuilder';
 
 //npx playwright test tests/api/user/user.post.spec.ts
 test.describe('/users/register - POST endpoint validation', () => {
-    let userId: string;
 
-    test('Register an user successfully', async ({ userClient }) => {
-        const userData = await UserDataBuilder.validRequestBody();
-        const requestData = fillRequestTemplate(registerUserTemplate, userData);
-        const _response = await userClient.postRegister(requestData);
+    test('Register an user successfully', async ({ userClient, adminToken }) => {
+        let userId: string;
 
-        expect.soft(_response.status()).toBe(201);
+        await test.step('Send POST request to register user', async () => {
+            const userData = await UserDataBuilder.validRequestBody();
+            const requestData = fillRequestTemplate(registerUserTemplate, userData);
 
-        const response = await _response.json();
-        expect.soft(response.first_name).toBe(userData.first_name);
-        expect.soft(response.last_name).toBe(userData.last_name);
-        expect.soft(response.phone).toBe(userData.phone);
-        expect.soft(response.dob).toBe(userData.dob);
-        expect.soft(response.email).toBe(userData.email);
-        expect.soft(response.address.street).toBe(userData.street);
-        expect.soft(response.address.city).toBe(userData.city);
-        expect.soft(response.address.state).toBe(userData.state);
-        expect.soft(response.address.country).toBe(userData.country);
-        expect.soft(response.address.postal_code).toBe(userData.postal_code);
-        userId = response.id;
-        console.log(response);
+            // Create user
+            const createResponse = await userClient.postRegister(requestData);
+            expect.soft(createResponse.status()).toBe(201);
+            const createdUser = await createResponse.json();
+            userId = createdUser.id;
+
+            // Validate response
+            expect.soft(createdUser.first_name).toBe(userData.first_name);
+            expect.soft(createdUser.last_name).toBe(userData.last_name);
+            expect.soft(createdUser.phone).toBe(userData.phone);
+            expect.soft(createdUser.dob).toBe(userData.dob);
+            expect.soft(createdUser.email).toBe(userData.email);
+            expect.soft(createdUser.address.street).toBe(userData.street);
+            expect.soft(createdUser.address.city).toBe(userData.city);
+            expect.soft(createdUser.address.state).toBe(userData.state);
+            expect.soft(createdUser.address.country).toBe(userData.country);
+            expect.soft(createdUser.address.postal_code).toBe(userData.postal_code);
+        });
+        await test.step('Delete registered user to clean up', async () => {
+            console.log('Deleting user with ID:', userId);
+            const _response = await userClient.deleteUser(adminToken, userId);
+            expect.soft(_response.status()).toBe(204);
+            console.log(`Deleted user with ID: ${userId}`);
+        });
     });
 
     test('Register an user without required fields', async ({ userClient }) => {
@@ -40,7 +50,6 @@ test.describe('/users/register - POST endpoint validation', () => {
         expect.soft(response.last_name[0]).toBe("The last name field is required.");
         expect.soft(response.email[0]).toBe("The email field is required.");
         expect.soft(response.password[0]).toBe("The password field is required.");
-        console.log(response);
     });
 
     test('Register an user with invalid password', async ({ userClient }) => {
@@ -56,16 +65,6 @@ test.describe('/users/register - POST endpoint validation', () => {
             'The password field must contain at least one symbol.',
             'The password field must contain at least one number.'
         ]);
-        console.log(response);
     });
 
-    test.afterAll(async ({ adminToken, userClient }) => {
-        if (userId) {
-            const _response = await userClient.deleteUser(adminToken, userId);
-            expect.soft(_response.status()).toBe(200);
-            console.log(`Deleted user with ID: ${userId}`);
-        } else {
-            console.warn('No user was created. Skipping deletion of user.');
-        }
-    });
 });

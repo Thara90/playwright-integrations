@@ -1,4 +1,5 @@
 import { APIRequestContext, expect } from '@playwright/test';
+import { logRequest, logResponse } from '@utils/apiUtils';
 import { log } from 'console';
 
 export class UserClient {
@@ -19,7 +20,8 @@ export class UserClient {
         'Content-Type': 'application/json'
       }
     });
-    console.log(`${this.baseUrl}/users/login`);
+    logRequest('POST', `${this.baseUrl}/users/login`, credentials);
+    await logResponse(response);
     return response;
   }
 
@@ -30,7 +32,8 @@ export class UserClient {
         'Content-Type': 'application/json'
       }
     });
-    console.log(`${this.baseUrl}/users/register`);
+    logRequest('POST', `${this.baseUrl}/users/register`, userData);
+    await logResponse(response);
     return response;
   }
 
@@ -43,7 +46,8 @@ export class UserClient {
         'Content-Type': 'application/json'
       }
     });
-    console.log(`${this.baseUrl}/users`);
+    logRequest('GET', `${this.baseUrl}/users`, {});
+    await logResponse(response);
     return response;
   }
 
@@ -54,7 +58,8 @@ export class UserClient {
         'Content-Type': 'application/json'
       }
     });
-    console.log(`${this.baseUrl}/users/${userId}`);
+    logRequest('GET', `${this.baseUrl}/users/${userId}`, {});
+    await logResponse(response);
     return response;
   }
 
@@ -65,7 +70,8 @@ export class UserClient {
         'Content-Type': 'application/json'
       }
     });
-    console.log(`${this.baseUrl}/users/me`);
+    logRequest('GET', `${this.baseUrl}/users/me`, {});
+    await logResponse(response);
     return response;
   }
 
@@ -78,7 +84,8 @@ export class UserClient {
         'Content-Type': 'application/json'
       }
     });
-    console.log(`${this.baseUrl}/users/${userId}`);
+    logRequest('DELETE', `${this.baseUrl}/users/${userId}`, {});
+    await logResponse(response);
     return response;
   }
 
@@ -92,6 +99,8 @@ export class UserClient {
         'Content-Type': 'application/json'
       }
     });
+    logRequest('PUT', `${this.baseUrl}/users/${userId}`, {});
+    await logResponse(response);
     return response;
   }
 }

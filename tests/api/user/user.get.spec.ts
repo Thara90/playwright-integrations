@@ -11,9 +11,7 @@ test.describe('/users - Get endpoint validation', () => {
         const _response = await userClient.getUsers(adminToken);
         expect.soft(_response.status()).toBe(200);
         expect.soft(_response.ok()).toBeTruthy();
-
         const response = await _response.json();
-        console.log(response);
     });
 
     test('Retreive all users without authorizing', async ({ userClient }) => {
@@ -21,7 +19,6 @@ test.describe('/users - Get endpoint validation', () => {
         expect.soft(_response.status()).toBe(401);
         const response = await _response.json();
         expect.soft(response.message).toBe("Unauthorized");
-        console.log(response);
     });
 });
 
@@ -42,17 +39,13 @@ test.describe('/users/${userId} - Get endpoint validation', () => {
         const _response = await userClient.getUserById(adminToken, userId);
         expect.soft(_response.status()).toBe(200);
         expect.soft(_response.ok()).toBeTruthy();
-
         const response = await _response.json();
-        console.log(response);
     });
 
     test("Retreive user that doesn't exist", async ({ adminToken, userClient }) => {
         const _response = await userClient.getUserById(adminToken, 'nonExistentUserId');
         expect.soft(_response.status()).toBe(404);
-
         const response = await _response.json();
-        console.log(response);
     });
 
     test('Retreive user without authorizing', async ({ userClient }) => {
@@ -60,7 +53,6 @@ test.describe('/users/${userId} - Get endpoint validation', () => {
         expect.soft(_response.status()).toBe(401);
         const response = await _response.json();
         expect.soft(response.message).toBe("Unauthorized");
-        console.log(response);
     });
 });
 
@@ -70,9 +62,7 @@ test.describe('/users/me - Get endpoint validation', () => {
         const _response = await userClient.getCurrentUser(adminToken);
         expect.soft(_response.status()).toBe(200);
         expect.soft(_response.ok()).toBeTruthy();
-
         const response = await _response.json();
-        console.log(response);
     });
 
     test('Retreive current user without authorizing', async ({ userClient }) => {
@@ -80,6 +70,5 @@ test.describe('/users/me - Get endpoint validation', () => {
         expect.soft(_response.status()).toBe(401);
         const response = await _response.json();
         expect.soft(response.message).toBe("Unauthorized");
-        console.log(response);
     });
 });

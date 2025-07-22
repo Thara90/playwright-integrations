@@ -20,11 +20,21 @@ test.describe('/users/{userId} - PUT endpoint validation', () => {
 
     test("Update registered user successfully", async ({ adminToken, userClient }) => {
         expect(userId).toBeTruthy();
-        const userData = await UserDataBuilder.validRequestBody();
-        const requestData = fillRequestTemplate(registerUserTemplate, userData);
+        const updatedUserData = await UserDataBuilder.validRequestBody();
+        const requestData = fillRequestTemplate(registerUserTemplate, updatedUserData);
         const _response = await userClient.putUser(adminToken, requestData, userId);
         expect.soft(_response.status()).toBe(200);
         const response = await _response.json();
+        expect.soft(response.first_name).toBe(updatedUserData.first_name);
+        expect.soft(response.last_name).toBe(updatedUserData.last_name);
+        expect.soft(response.phone).toBe(updatedUserData.phone);
+        expect.soft(response.dob).toBe(updatedUserData.dob);
+        expect.soft(response.email).toBe(updatedUserData.email);
+        expect.soft(response.address.street).toBe(updatedUserData.street);
+        expect.soft(response.address.city).toBe(updatedUserData.city);
+        expect.soft(response.address.state).toBe(updatedUserData.state);
+        expect.soft(response.address.country).toBe(updatedUserData.country);
+        expect.soft(response.address.postal_code).toBe(updatedUserData.postal_code);
         console.log(`Updated user with ID: ${userId}`);
         console.log(response);
     });
