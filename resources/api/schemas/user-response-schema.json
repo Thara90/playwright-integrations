@@ -17,18 +17,21 @@
           "type": "string"
         },
         "state": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "country": {
           "type": "string"
         },
         "postal_code": {
-          "type": "string"
+          "type": ["string", "null"]
         }
       }
     },
     "phone": {
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "dob": {
       "type": "string"
@@ -40,7 +43,10 @@
       "type": "string"
     },
     "provider": {
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "totp_enabled": {
       "type": "boolean"
@@ -49,10 +55,7 @@
       "type": "boolean"
     },
     "failed_login_attempts": {
-      "type": [
-        "integer",
-        "null"
-      ]
+      "type": ["integer", "null"]
     },
     "created_at": {
       "type": "string"
