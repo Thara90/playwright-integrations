@@ -2,6 +2,19 @@
 import { APIResponse } from '@playwright/test';
 import registerUserTemplate from '@requestsTemplates/post-register-request.json';
 import { UserDataBuilder } from '@dataBuilders/userDataBuilder';
+import Ajv, { JSONSchemaType } from "ajv";
+
+const ajv = new Ajv({ allErrors: true });
+
+export function validateSchema(responseData: any, schema: any): void {
+  const validate = ajv.compile(schema);
+  const valid = validate(responseData);
+  if (!valid) {
+    console.error("❌ Schema validation failed:", validate.errors);
+    throw new Error("Schema validation failed");
+  }
+  console.log("✅ Schema validation passed");
+}
 
 export function fillRequestTemplate(template: any, data: Record<string, any>) {
   const templateString = JSON.stringify(template);

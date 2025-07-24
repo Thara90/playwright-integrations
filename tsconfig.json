@@ -7,7 +7,8 @@
       "@dataBuilders/*": ["resources/api/dataBuilders/*"],
       "@requestsTemplates/*": ["resources/api/req-jsons/*"],
       "@fixtures/*": ["resources/api/fixtures/*"],
-      "@utils/*": ["resources/utils/*"]
+      "@utils/*": ["resources/utils/*"],
+      "@schemas/*": ["resources/api/schemas/*"]
     }
   }
 }
