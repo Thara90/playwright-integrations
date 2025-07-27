@@ -25,4 +25,16 @@ export class BrandClient {
     return response;
   }
 
+  async getBrandById(brandId: string) {
+    const url = `${this.baseUrl}/brands/${brandId}`;
+    const headers = {
+      'Content-Type': 'application/json'
+    }
+    const response = await this.request.get(url, { headers });
+
+    logRequest('GET', url, headers);
+    await logResponse(response);
+    return response;
+  }
+
 }
