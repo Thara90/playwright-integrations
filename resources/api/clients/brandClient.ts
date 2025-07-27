@@ -2,7 +2,7 @@ import { APIRequestContext, expect } from '@playwright/test';
 import { logRequest, logResponse } from '@utils/apiUtils';
 import { log } from 'console';
 
-export class ProductClient {
+export class BrandClient {
   readonly request: APIRequestContext;
   readonly baseUrl: string;
 

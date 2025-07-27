@@ -1,11 +1,13 @@
 import { test as baseTest, APIRequestContext } from '@playwright/test';
 import { UserClient } from '../clients/userClient';
 import { ProductClient } from '../clients/productClient';
+import { BrandClient } from '../clients/brandClient';
 import ApiTestInputData from '../../../test-data/apiTestInputData.json';
 
 type ApiFixtures = {
   userClient: UserClient;
   productClient: ProductClient;
+  brandClient: BrandClient;
   adminToken: string;
   customer1Token: string;
   customer2Token: string;
@@ -18,6 +20,9 @@ export const test = baseTest.extend<ApiFixtures>({
   },
   productClient: async ({ request }, use) => {
     await use(new ProductClient(request));
+  },
+  brandClient: async ({ request }, use) => {
+    await use(new BrandClient(request));
   },
 
   /* ----------- TOKEN GENERATION ----------- */
