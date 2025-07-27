@@ -37,6 +37,7 @@ test.describe('/users/${userId} - Get endpoint validation', () => {
             expect.soft(_response.status()).toBe(200);
             expect.soft(_response.ok()).toBeTruthy();
             const response = await _response.json();
+            validateSchema(response, userResponseSchema);
         });
     });
 
