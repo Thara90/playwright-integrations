@@ -3,6 +3,7 @@ import { APIResponse } from '@playwright/test';
 import registerUserTemplate from '@requestsTemplates/post-register-request.json';
 import { UserDataBuilder } from '@dataBuilders/userDataBuilder';
 import Ajv, { JSONSchemaType } from "ajv";
+import { faker } from '@faker-js/faker'
 
 const ajv = new Ajv({ allErrors: true });
 
@@ -63,4 +64,14 @@ export async function createUser(userClient: any) {
 
   const body = await response.json();
   return { userData: userData, createdUser: body };
+}
+
+export async function createBrand() {
+  const randomText = faker.string.alphanumeric(6);
+    const brandName = `Automation-${randomText}`;
+  
+  return {
+    name: brandName,
+    slug: brandName
+  };
 }

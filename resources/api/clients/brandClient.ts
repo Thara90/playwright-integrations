@@ -1,6 +1,5 @@
 import { APIRequestContext, expect } from '@playwright/test';
 import { logRequest, logResponse } from '@utils/apiUtils';
-import { log } from 'console';
 
 export class BrandClient {
   readonly request: APIRequestContext;
@@ -9,6 +8,29 @@ export class BrandClient {
   constructor(request: APIRequestContext) {
     this.request = request;
     this.baseUrl = process.env.API_URL!;
+  }
+
+  /* ----------- POST ENDPOINTS ----------- */
+
+  async postBrands(brandData: Record<string, any>) {
+    const url = `${this.baseUrl}/brands`;
+    const headers = {
+      'Content-Type': 'application/json'
+    }
+
+    const data = {
+      name: brandData.name,
+      slug: brandData.slug
+    };
+
+    const response = await this.request.post(url, {
+      data,
+      headers
+    });
+
+    logRequest('POST', url, headers, data);
+    await logResponse(response);
+    return response;
   }
 
   /* ----------- GET ENDPOINTS ----------- */
@@ -37,7 +59,7 @@ export class BrandClient {
     return response;
   }
 
-    async getBrandBySearch(searchQuery: string) {
+  async getBrandBySearch(searchQuery: string) {
     const url = `${this.baseUrl}/brands/search?q=${searchQuery}`;
     const headers = {
       'Content-Type': 'application/json'
