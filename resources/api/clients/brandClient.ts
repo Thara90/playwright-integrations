@@ -71,4 +71,20 @@ export class BrandClient {
     return response;
   }
 
+  /* ----------- DELETE ENDPOINTS ----------- */
+
+  async deleteBrand(token, brandId: string) {
+    const url = `${this.baseUrl}/brands/${brandId}`;
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    };
+
+    const response = await this.request.delete(url, { headers });
+
+    logRequest('DELETE', url, headers);
+    await logResponse(response);
+    return response;
+  }
+
 }
