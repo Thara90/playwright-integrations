@@ -35,7 +35,7 @@ export class UserClient {
       headers
     });
 
-    logRequest('POST', url, userData);
+    logRequest('POST', url, headers, userData);
     await logResponse(response);
     return response;
   }

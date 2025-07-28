@@ -28,7 +28,7 @@ export class BrandClient {
       headers
     });
 
-    logRequest('POST', url, headers, data);
+    logRequest('POST', url, headers, brandData);
     await logResponse(response);
     return response;
   }
