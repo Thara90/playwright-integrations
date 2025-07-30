@@ -1,6 +1,5 @@
 import { APIRequestContext, expect } from '@playwright/test';
 import { logRequest, logResponse } from '@utils/apiUtils';
-import { log } from 'console';
 
 export class UserClient {
   readonly request: APIRequestContext;
@@ -20,8 +19,6 @@ export class UserClient {
         'Content-Type': 'application/json'
       }
     });
-    //logRequest('POST', `${this.baseUrl}/users/login`, credentials);
-    //await logResponse(response);
     return response;
   }
 
