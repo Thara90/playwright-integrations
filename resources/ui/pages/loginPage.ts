@@ -36,9 +36,17 @@ export class LoginPage {
         await this.page.waitForURL('/account');
     }
 
+    async assertLoginSuccess() {
+        await this.page.waitForURL('/account');
+    }
+
+    async assertLoginFailure() {
+
+    }
+
     async logout() {
         await this.ddNavigationMenu.click();
         await this.signOut.click();
-        //await this.page.waitForURL('/auth/login');
+        await this.page.waitForURL('/auth/login');
     }
 }
